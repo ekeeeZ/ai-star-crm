@@ -50,6 +50,21 @@ def add_user(user_id, username, first_name, phone=""):
         return True
     return False
 
+def broadcast_notification(text):
+    """Отправить уведомление всем пользователям из таблицы users."""
+    cursor.execute("SELECT id FROM users")
+    users = cursor.fetchall()
+    sent = 0
+    failed = 0
+    for (user_id,) in users:
+        try:
+            bot.send_message(user_id, text)
+            sent += 1
+            time.sleep(0.05)
+        except Exception:
+            failed += 1
+    return sent, failed
+
 def save_order(user_id, username, first_name, phone, description, service="Не указана"):
     try:
         ws = connect_to_sheets()
