@@ -1,0 +1,9 @@
+pyTelegramBotAPI
+groq
+gspread
+oauth2client
+pandas
+xlsxwriter
+Flask
+requests
+python-dotenv
